@@ -36,6 +36,8 @@ import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
 
+import static android.content.Intent.EXTRA_TEXT;
+
 public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler {
 
     private RecyclerView mRecyclerView;
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         Context context = this;
         Class destinationClass = DetailActivity.class;
         Intent intentToStartDetailActivity = new Intent(context, destinationClass);
-        // TODO (1) Pass the weather to the DetailActivity
+        intentToStartDetailActivity.putExtra(EXTRA_TEXT, weatherForDay);
         startActivity(intentToStartDetailActivity);
     }
 
