@@ -38,6 +38,8 @@ import com.example.android.sunshine.utilities.OpenWeatherJsonUtils;
 
 import java.net.URL;
 
+import static android.content.Intent.ACTION_VIEW;
+
 public class MainActivity extends AppCompatActivity implements ForecastAdapterOnClickHandler {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -215,14 +217,27 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_refresh) {
-            mForecastAdapter.setWeatherData(null);
-            loadWeatherData();
-            return true;
+        switch (id) {
+            case R.id.action_refresh:
+                mForecastAdapter.setWeatherData(null);
+                loadWeatherData();
+                return true;
+
+            case R.id.open_map:
+                Intent intent = new Intent(ACTION_VIEW);
+                Uri geoLocation = new Uri.Builder().scheme("geo").path("0,0")
+                        .query("Corporation Girls High School, Jogupalya, Ulsoor").build();
+                intent.setData(geoLocation);
+
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                } else {
+                    Log.d(TAG, "Couldn't call " + geoLocation.toString() + ", no receiving apps installed!");
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        // TODO (2) Launch the map when the map menu item is clicked
-
-        return super.onOptionsItemSelected(item);
     }
 }
