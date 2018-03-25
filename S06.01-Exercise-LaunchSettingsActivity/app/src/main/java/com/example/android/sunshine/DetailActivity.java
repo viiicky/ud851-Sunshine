@@ -50,10 +50,13 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detail, menu);
+        // set share button intent
         MenuItem menuItem = menu.findItem(R.id.action_share);
         menuItem.setIntent(createShareForecastIntent());
+
+        // set settings button intent
+        menu.findItem(R.id.action_settings).setIntent(new Intent(this, SettingsActivity.class));
         return true;
     }
 
-    // TODO (7) Launch SettingsActivity when the Settings option is clicked
 }
