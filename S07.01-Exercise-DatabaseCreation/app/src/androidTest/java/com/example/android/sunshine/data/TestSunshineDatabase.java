@@ -237,7 +237,7 @@ public class TestSunshineDatabase {
         /* Delete the row we just inserted to see if the database will reuse the rowID */
         database.delete(
                 REFLECTED_TABLE_NAME,
-                "_ID == " + firstRowId,
+                "_ID = " + firstRowId,
                 null);
 
         /*
